@@ -1,18 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { store } from './store';
-// import { Error } from './components/error/Error';
-import { App } from './pages/app/App';
+import { App } from './App';
 
-ReactDOM.render(
-    <Provider store={store}>
-        {/* <Error> */}
-        <Router>
-            <App />
-        </Router>
-        {/* </Error> */}
-    </Provider>,
-    document.getElementById("root")
-);
+ReactDOM.render(<App />, document.getElementById("root"));
