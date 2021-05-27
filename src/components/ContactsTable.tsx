@@ -11,6 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import {Typography} from '@material-ui/core';
+import {CopyToClipboard} from "./CopyToClipboard";
+import {NationalityHumanName} from '../constants/nationality'
 
 interface ContactsTableProps {
     data: any
@@ -46,13 +48,23 @@ export const ContactsTable = (props: ContactsTableProps) => {
                                 {contacts.name.title} {contacts.name.first} {contacts.name.last}
                             </TableCell>
                             <TableCell>
-                                <Typography>{format(parseISO(contacts.dob.date), 'MM/dd/yyyy')} years</Typography>
+                                <Typography>{format(parseISO(contacts.dob.date), 'MM/dd/yyyy')}</Typography>
                                 <Typography>{contacts.dob.age} years</Typography>
                             </TableCell>
-                            <TableCell>{contacts.email}</TableCell>
-                            <TableCell>{contacts.phone}</TableCell>
-                            <TableCell>{contacts.location.city}</TableCell>
-                            <TableCell>{contacts.nat}</TableCell>
+                            <TableCell>
+                                <CopyToClipboard text={contacts.email}/>
+                            </TableCell>
+                            <TableCell>
+                                <CopyToClipboard text={contacts.phone}/>
+                            </TableCell>
+                            <TableCell>
+                                <Typography>{contacts.location.country}</Typography>
+                                <Typography>
+                                    {contacts.location.city}, {contacts.location.street.name}, {""}
+                                    {contacts.location.street.number}
+                                </Typography>
+                            </TableCell>
+                            <TableCell>{NationalityHumanName[contacts.nat]}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
