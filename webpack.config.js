@@ -12,20 +12,20 @@ module.exports = {
     module: {
         // коллекция правил как обрабатывать модули
         rules: [{ // load js files
-                test: /\.js$/, // выбираем расширения которые хотим обработать лоадером
-                exclude: /node_modules/, // не обрабатывать лоадером файлы из node modules
-                use: [ // указываем какой лоадер мы будем использовать
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                '@babel/preset-env',
-                                '@babel/preset-react',
-                            ],
-                        }
-                    },
-                ]
-            },
+            test: /\.js$/, // выбираем расширения которые хотим обработать лоадером
+            exclude: /node_modules/, // не обрабатывать лоадером файлы из node modules
+            use: [ // указываем какой лоадер мы будем использовать
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            '@babel/preset-env',
+                            '@babel/preset-react',
+                        ],
+                    }
+                },
+            ]
+        },
             { // load typesript files
                 test: /\.(ts|tsx)$/,
                 use: {
