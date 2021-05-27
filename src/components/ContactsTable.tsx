@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import {Typography} from '@material-ui/core';
 import {CopyToClipboard} from "./CopyToClipboard";
-import {NationalityHumanName} from '../constants/nationality'
+import { Nationality} from '../constants/nationality'
 
 interface ContactsTableProps {
     data: any
@@ -64,7 +64,7 @@ export const ContactsTable = (props: ContactsTableProps) => {
                                     {contacts.location.street.number}
                                 </Typography>
                             </TableCell>
-                            <TableCell>{NationalityHumanName[contacts.nat]}</TableCell>
+                            {/*<TableCell>{Nationality[contacts.nat]}</TableCell>*/}
                         </TableRow>
                     ))}
                 </TableBody>
