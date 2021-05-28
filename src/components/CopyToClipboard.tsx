@@ -1,21 +1,16 @@
-import React, {useCallback, useState} from 'react';
-import Box from '@material-ui/core/Box';
+import React, { useCallback, useState } from 'react';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Tooltip from '@material-ui/core/Tooltip';
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
-import {useCopyToClipboard} from 'react-use'
+import { useCopyToClipboard } from 'react-use'
+import { StatusCopy } from '../constants/statusCopyEnum'
 
 interface CopyToClipboardProps {
     text: string
 }
-
-// enum StatusCopy {
-//     Copy = 'Copy',
-//     Copied = 'Copied'
-// }
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -28,19 +23,19 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 
 export const CopyToClipboard = (props: CopyToClipboardProps) => {
     const [, copyToClipboard] = useCopyToClipboard()
-    const [statusCopy, setStatusCopy] = useState('Copy')
+    const [statusCopy, setStatusCopy] = useState(StatusCopy.Copy)
     const classes = useStyles()
 
-    const copyIcon = statusCopy === 'Copy' ? <FileCopyOutlinedIcon fontSize="small" className={classes.icon}/> :
-        <FileCopyIcon fontSize="small" className={classes.icon}/>
+    const copyIcon = statusCopy === 'Copy' ? <FileCopyOutlinedIcon fontSize="small" className={classes.icon} /> :
+        <FileCopyIcon fontSize="small" className={classes.icon} />
 
     const clickedCopy = useCallback(() => {
         copyToClipboard(props.text)
-        setStatusCopy('Copied')
+        setStatusCopy(StatusCopy.Copied)
     }, [copyToClipboard, props.text])
 
     const clickAway = useCallback(() => {
-        setStatusCopy('Copy')
+        setStatusCopy(StatusCopy.Copy)
     }, [setStatusCopy])
 
     return (
