@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useContacts } from "../../hooks/useContacts";
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core';
 import { ContactsTable } from "../../components/ContactsTable";
-import ViewListIcon from '@material-ui/icons/ViewList';
-import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
-import ToggleButton from '@material-ui/lab/ToggleButton';
-import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import { ButtonChangeMode } from '../../components/ButtonChangeMode'
 import { ViewMode } from '../../constants/viewModeEnum'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
@@ -38,10 +34,6 @@ export const Contacts = () => {
         return <div>...error</div>
     }
 
-    const changeViewMode = (event: any, nextView: any) => {
-        setDataViewMode(nextView)
-    }
-
     return (
         <Container className={classes.root}>
             <Grid container>
@@ -50,18 +42,10 @@ export const Contacts = () => {
                         Contacts
                     </Typography>
 
-                    <ToggleButtonGroup
-                        orientation="horizontal"
-                        exclusive
-                        value={dataViewMode}
-                        onChange={changeViewMode}>
-                        <ToggleButton value={ViewMode.Table} aria-label={ViewMode.Table} >
-                            <ViewListIcon />
-                        </ToggleButton>
-                        <ToggleButton value={ViewMode.Grid} aria-label={ViewMode.Grid}>
-                            <ViewModuleIcon />
-                        </ToggleButton>
-                    </ToggleButtonGroup>
+                    <ButtonChangeMode
+                        dataViewMode={dataViewMode}
+                        setDataViewMode={setDataViewMode}
+                    />
                 </Grid>
 
                 <Grid item xs={12}>

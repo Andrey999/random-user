@@ -64,7 +64,7 @@ export const ContactsTable = (props: ContactsTableProps) => {
                                     {contacts.location.street.number}
                                 </Typography>
                             </TableCell>
-                            {/*<TableCell>{Nationality[contacts.nat]}</TableCell>*/}
+                            <TableCell>{Nationality[contacts.nat]}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
