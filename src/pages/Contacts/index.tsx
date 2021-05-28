@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useContacts } from "../../hooks/useContacts";
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container'
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
 import { Typography } from '@material-ui/core';
@@ -12,8 +13,10 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
         marginTop: theme.spacing(4),
     },
-    headTitle: {
+    headBox: {
         marginBottom: theme.spacing(3),
+        display: 'flex',
+        justifyContent: 'space-between'
     },
 }));
 
@@ -37,7 +40,7 @@ export const Contacts = () => {
     return (
         <Container className={classes.root}>
             <Grid container>
-                <Grid item xs={12} className={classes.headTitle}>
+                <Grid item xs={12} className={classes.headBox}>
                     <Typography variant="h5">
                         Contacts
                     </Typography>

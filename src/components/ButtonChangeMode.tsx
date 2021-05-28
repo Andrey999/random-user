@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import ViewListIcon from '@material-ui/icons/ViewList';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { ViewMode } from '../constants/viewModeEnum'
@@ -12,9 +11,10 @@ interface ButtonChangeModeProps {
 }
 
 export const ButtonChangeMode = (props: ButtonChangeModeProps) => {
-    const changeViewMode = (event: any, nextView: any) => {
+    const changeViewMode = useCallback((event, nextView) => {
         props.setDataViewMode(nextView)
-    }
+    }, [props.setDataViewMode])
+
     return (
         <ToggleButtonGroup
             orientation="horizontal"
@@ -22,10 +22,10 @@ export const ButtonChangeMode = (props: ButtonChangeModeProps) => {
             value={props.dataViewMode}
             onChange={changeViewMode}
         >
-            <ToggleButton value={ViewMode.Table} aria-label={ViewMode.Table} >
+            <ToggleButton size="small" value={ViewMode.Table} aria-label={ViewMode.Table} >
                 <ViewListIcon />
             </ToggleButton>
-            <ToggleButton value={ViewMode.Grid} aria-label={ViewMode.Grid}>
+            <ToggleButton size="small" value={ViewMode.Grid} aria-label={ViewMode.Grid}>
                 <ViewModuleIcon />
             </ToggleButton>
         </ToggleButtonGroup>
