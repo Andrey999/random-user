@@ -26,7 +26,7 @@ export const CopyToClipboard = (props: CopyToClipboardProps) => {
     const [statusCopy, setStatusCopy] = useState(StatusCopy.Copy)
     const classes = useStyles()
 
-    const copyIcon = statusCopy === 'Copy' ? <FileCopyOutlinedIcon fontSize="small" className={classes.icon} /> :
+    const copyIcon = statusCopy === StatusCopy.Copy ? <FileCopyOutlinedIcon fontSize="small" className={classes.icon} /> :
         <FileCopyIcon fontSize="small" className={classes.icon} />
 
     const clickedCopy = useCallback(() => {

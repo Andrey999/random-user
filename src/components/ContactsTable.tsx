@@ -24,6 +24,9 @@ const useStyles = makeStyles({
 
 export const ContactsTable = (props: ContactsTableProps) => {
     const classes = useStyles()
+    if(!props.data.length) {
+        return <div>Таких данных нет</div>
+    }
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} size="small" aria-label="a dense table">
