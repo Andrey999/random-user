@@ -7,12 +7,7 @@ import { Typography } from '@material-ui/core';
 import { ContactsTable } from "../../components/ContactsTable";
 import { ButtonChangeMode } from '../../components/ButtonChangeMode'
 import { ViewMode } from '../../constants/viewModeEnum'
-import { FilterFullNameSearch } from '../../components/FilterFullNameSearch'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+import { Filters } from '../../components/Filters'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -26,9 +21,6 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
     filtersBox: {
         marginBottom: theme.spacing(3),
     },
-    fieldGender: {
-        width: '120px'
-    }
 }));
 
 const FiltersDefaultValue = {
@@ -49,20 +41,22 @@ export const Contacts = () => {
 
     const handleChangeFilter = (event: any) => {
         const { name, value } = event.target
-        console.log(event)
         setFilters((prevEvent) => ({
             ...prevEvent,
             [name]: value
         }))
     }
 
-    const searchByName = contacts.data.filter(c => c.name.first.toLowerCase().includes(filters.fullname.toLowerCase())
+    const filteredData = contacts.data.filter(c => c.name.first.toLowerCase().includes(filters.fullname.toLowerCase())
         || c.name.last.toLowerCase().includes(filters.fullname.toLowerCase()))
         .filter(g => {
-            if(filters.gender === 'all') return true
+            if (filters.gender === 'all') return true
             return g.gender === filters.gender
         })
-        .filter(n => n.nat.toLowerCase().includes(filters.nationality.toLowerCase()))
+        .filter(n => {
+            if (filters.nationality === '') return true
+            return n.nat === filters.nationality
+        })
 
     if (contacts.isLoading) {
         return <div>...loading</div>
@@ -87,46 +81,15 @@ export const Contacts = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.filtersBox}>
-                    {/* <FilterFullNameSearch /> */}
-                    <form noValidate autoComplete="off">
-                        <TextField
-                            name="fullname"
-                            size="small"
-                            label="Search by full name"
-                            variant="outlined"
-                            value={filters.fullname}
-                            onChange={handleChangeFilter}
-                        />
-
-                        <FormControl size="small" variant="outlined" className={classes.fieldGender}>
-                            <InputLabel id="gender">Gender</InputLabel>
-                            <Select
-                                name='gender'
-                                labelId="gender"
-                                value={filters.gender}
-                                onChange={handleChangeFilter}
-                                label="Gender"
-                            >
-                                <MenuItem value='all'>All</MenuItem>
-                                <MenuItem value='male'>Male</MenuItem>
-                                <MenuItem value='female'>Female</MenuItem>
-                            </Select>
-                        </FormControl>
-
-                        <TextField
-                            name="nationality"
-                            size="small"
-                            label="Search by nationality"
-                            variant="outlined"
-                            value={filters.nationality}
-                            onChange={handleChangeFilter}
-                        />
-                    </form>
+                    <Filters
+                        filters={FiltersDefaultValue}
+                        handleChangeFilter={handleChangeFilter}
+                    />
                 </Grid>
 
                 <Grid item xs={12}>
                     {dataViewMode === ViewMode.Table ?
-                        <ContactsTable data={searchByName} />
+                        <ContactsTable data={filteredData} />
                         :
                         'this is grid'}
                 </Grid>
