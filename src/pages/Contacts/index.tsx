@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
 const FiltersDefaultValue = {
     fullname: '',
     gender: 'all',
-    nationality: ''
+    nationality: 'all'
 }
 
 export const Contacts = () => {
@@ -39,14 +39,6 @@ export const Contacts = () => {
         localStorage.setItem('dataViewMode', dataViewMode)
     }, [dataViewMode])
 
-    const handleChangeFilter = (event: any) => {
-        const { name, value } = event.target
-        setFilters((prevEvent) => ({
-            ...prevEvent,
-            [name]: value
-        }))
-    }
-
     const filteredData = contacts.data.filter(c => c.name.first.toLowerCase().includes(filters.fullname.toLowerCase())
         || c.name.last.toLowerCase().includes(filters.fullname.toLowerCase()))
         .filter(g => {
@@ -54,9 +46,13 @@ export const Contacts = () => {
             return g.gender === filters.gender
         })
         .filter(n => {
-            if (filters.nationality === '') return true
+            if (filters.nationality === 'all') return true
             return n.nat === filters.nationality
         })
+
+    const clearFilters = () => {
+        setFilters(FiltersDefaultValue)
+    }
 
     if (contacts.isLoading) {
         return <div>...loading</div>
@@ -82,8 +78,9 @@ export const Contacts = () => {
 
                 <Grid item xs={12} className={classes.filtersBox}>
                     <Filters
-                        filters={FiltersDefaultValue}
-                        handleChangeFilter={handleChangeFilter}
+                        filters={filters}
+                        setFilters={setFilters}
+                        clearFilters={clearFilters}
                     />
                 </Grid>
 
