@@ -1,11 +1,7 @@
-import {useEffect, useState} from "react";
-
-interface ContactsProps {
-    email: string
-}
+import { useEffect, useState } from "react";
 
 export const useContacts = () => {
-    const [data, setData] = useState<ContactsProps[]>([])
+    const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [isError, setIsError] = useState(false)
 
@@ -14,7 +10,7 @@ export const useContacts = () => {
             try {
                 setIsLoading(true)
                 const response = await fetch('https://randomuser.me/api/?results=20')
-                const {results, error} = await response.json()
+                const { results, error } = await response.json()
                 if (error) {
                     throw new Error(error)
                 }
@@ -29,5 +25,5 @@ export const useContacts = () => {
         getContacts()
     }, [])
 
-    return {data, isLoading, isError}
+    return { data, isLoading, isError }
 }

@@ -14,10 +14,6 @@ import {Typography} from '@material-ui/core';
 import {CopyToClipboard} from "./CopyToClipboard";
 import { Nationality} from '../constants/nationality'
 
-interface ContactsTableProps {
-    data: any
-}
-
 const useStyles = makeStyles({
     table: {},
 });

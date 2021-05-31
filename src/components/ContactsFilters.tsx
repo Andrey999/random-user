@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useCallback } from 'react'
 import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -36,7 +36,7 @@ interface ContactsFiltersProps {
     clearFilters: () => void
 }
 
-export const ContactsFilters = (props: ContactsFiltersProps) => {
+export const ContactsFilters = memo((props: ContactsFiltersProps) => { 
     const classes = useStyles()
 
     const handleChangeFilter = (event: any) => {
@@ -102,4 +102,4 @@ export const ContactsFilters = (props: ContactsFiltersProps) => {
             </Box>
         </form>
     )
-}
+})

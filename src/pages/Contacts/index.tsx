@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useContacts } from "../../hooks/useContacts";
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container'
@@ -50,9 +50,9 @@ export const Contacts = () => {
             return n.nat === filters.nationality
         })
 
-    const clearFilters = () => {
+    const clearFilters = useCallback(() => {
         setFilters(FiltersDefaultValue)
-    }
+    }, [])
 
     if (contacts.isLoading) {
         return <div>...loading</div>
