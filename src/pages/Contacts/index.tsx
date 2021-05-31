@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 import { ContactsTable } from "../../components/ContactsTable";
 import { ButtonChangeMode } from '../../components/ButtonChangeMode'
 import { ViewMode } from '../../constants/viewModeEnum'
-import { Filters } from '../../components/Filters'
+import { ContactsFilters } from '../../components/ContactsFilters'
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
     root: {
@@ -77,7 +77,7 @@ export const Contacts = () => {
                 </Grid>
 
                 <Grid item xs={12} className={classes.filtersBox}>
-                    <Filters
+                    <ContactsFilters
                         filters={filters}
                         setFilters={setFilters}
                         clearFilters={clearFilters}
