@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, SyntheticEvent, ChangeEvent, useCallback, Props } from 'react'
 import TextField from '@material-ui/core/TextField';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -31,16 +31,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface ContactsFiltersProps {
-    filters: any
-    setFilters: (e: any) => void
+    filters: { fullname: string, gender: string, nationality: string }
+    setFilters: (prev: any) => void
     clearFilters: () => void
 }
 
-export const ContactsFilters = memo((props: ContactsFiltersProps) => { 
+export const ContactsFilters = memo((props: ContactsFiltersProps) => {
     const classes = useStyles()
 
-    const handleChangeFilter = (event: any) => {
-        const { name, value } = event.target
+    const handleChangeFilter = (event: ChangeEvent<{ value: unknown }>) => {
+        const { name, value } = event.target as HTMLInputElement
         props.setFilters((prevEvent: any) => ({
             ...prevEvent,
             [name]: value

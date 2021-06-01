@@ -1,7 +1,7 @@
 import React from 'react';
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,9 +10,14 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
-import {Typography} from '@material-ui/core';
-import {CopyToClipboard} from "./CopyToClipboard";
-import { Nationality} from '../constants/nationality'
+import { Typography } from '@material-ui/core';
+import { CopyToClipboard } from "./CopyToClipboard";
+import { Nationality } from '../constants/nationality'
+import { Contacts } from '../interfaces/types'
+
+interface ContactsTableProps {
+    data: Contacts[]
+}
 
 const useStyles = makeStyles({
     table: {},
@@ -20,7 +25,7 @@ const useStyles = makeStyles({
 
 export const ContactsTable = (props: ContactsTableProps) => {
     const classes = useStyles()
-    if(!props.data.length) {
+    if (!props.data.length) {
         return <div>Таких данных нет</div>
     }
     return (
@@ -38,10 +43,10 @@ export const ContactsTable = (props: ContactsTableProps) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {props.data.map((contacts: any) => (
+                    {props.data.map(contacts => (
                         <TableRow key={contacts.login.uuid}>
                             <TableCell component="th" scope="row">
-                                <Avatar alt="" src={contacts.picture.thumbnail}/>
+                                <Avatar alt="" src={contacts.picture.thumbnail} />
                             </TableCell>
                             <TableCell>
                                 {contacts.name.title} {contacts.name.first} {contacts.name.last}
@@ -51,10 +56,10 @@ export const ContactsTable = (props: ContactsTableProps) => {
                                 <Typography>{contacts.dob.age} years</Typography>
                             </TableCell>
                             <TableCell>
-                                <CopyToClipboard text={contacts.email}/>
+                                <CopyToClipboard text={contacts.email} />
                             </TableCell>
                             <TableCell>
-                                <CopyToClipboard text={contacts.phone}/>
+                                <CopyToClipboard text={contacts.phone} />
                             </TableCell>
                             <TableCell>
                                 <Typography>{contacts.location.country}</Typography>
